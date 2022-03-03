@@ -498,6 +498,11 @@ elif [ -e ./ISODIR/sources/background_svr.png ]; then
   bckimg=background_svr.png
 fi
 
+if [ "${bckimg: -3}" == "png" ]; then
+wimlib-imagex update ISODIR/sources/boot.wim 1 \
+  --command "add ISODIR/sources/$bckimg /Windows/system32/winre.png" >/dev/null
+fi
+
 wimlib-imagex update ISODIR/sources/boot.wim 1 \
   --command "add ISODIR/sources/$bckimg /Windows/system32/winre.jpg" >/dev/null
 
@@ -527,9 +532,9 @@ echo "delete /Windows/System32/winpeshl.ini" >"$tempDir/update.txt"
 echo "add ISODIR/setup.exe /setup.exe" >>"$tempDir/update.txt"
 echo "add ISODIR/sources/inf/setup.cfg /sources/inf/setup.cfg" >>"$tempDir/update.txt"
 echo "add ISODIR/sources/$bckimg /Windows/system32/winre.jpg" >>"$tempDir/update.txt"
-if [ "${bckimg: -3}" == "bmp" ]; then
-  echo "add ISODIR/sources/$bckimg /sources/background.bmp" >>"$tempDir/update.txt"
-else
+echo "add ISODIR/sources/$bckimg /sources/background.bmp" >>"$tempDir/update.txt"
+if [ "${bckimg: -3}" == "png" ]; then
+  echo "add ISODIR/sources/$bckimg /Windows/system32/winre.png" >>"$tempDir/update.txt"
   echo "add ISODIR/sources/$bckimg /sources/background.png" >>"$tempDir/update.txt"
 fi
 for i in $files; do
