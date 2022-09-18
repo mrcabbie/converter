@@ -82,7 +82,7 @@ sudo pacman -S cabextract wimlib chntpw cdrtools
 ```
 If you use Fedora you can also install these using the following command:
 ```bash
-sudo dnf install cabextract wimlib chntpw genisoimage
+sudo dnf install cabextract wimlib wimlib-utils chntpw genisoimage
 ```
 
 If you use any other distribution, then you will need to check its repository
