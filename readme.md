@@ -73,12 +73,16 @@ If you use Debian or Ubuntu based distribution you can quickly install these
 using the following command:
 
 ```bash
-sudo apt-get install cabextract wimtools chntpw genisoimage
+sudo apt install cabextract wimtools chntpw genisoimage
 ```
 
 If you use Arch Linux you can also install these using the following command:
 ```bash
 sudo pacman -S cabextract wimlib chntpw cdrtools
+```
+If you use Fedora you can also install these using the following command:
+```bash
+sudo dnf install cabextract wimlib chntpw genisoimage
 ```
 
 If you use any other distribution, then you will need to check its repository
