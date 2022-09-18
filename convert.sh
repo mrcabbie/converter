@@ -1,5 +1,5 @@
 #!/bin/bash
-scriptName="UUP Converter v0.7.0"
+scriptName="UUP Converter v0.7.1"
 UUP_CONVERTER_SCRIPT=1
 
 export PATH=${PATH}:/usr/sbin
@@ -307,34 +307,21 @@ if [ "$1" == "-?" -o "$1" == "--help" -o "$1" == "-h" ]; then
   exit
 fi
 
-if ! which cabextract >/dev/null 2>&1 \
-|| ! which wimlib-imagex >/dev/null 2>&1 \
-|| ! which chntpw >/dev/null 2>&1 \
-|| ! which genisoimage >/dev/null 2>&1 \
-&& ! which mkisofs >/dev/null 2>&1; then
-  echo "One of required applications is not installed."
-  echo "The following applications need to be installed to use this script:"
-  echo " - cabextract"
-  echo " - wimlib-imagex"
-  echo " - chntpw"
-  echo " - genisoimage or mkisofs"
-  echo ""
-  if [ `uname` == "Linux" ]; then
-    # Linux
-    echo "If you use Debian or Ubuntu you can install these using:"
-    echo "sudo apt-get install cabextract wimtools chntpw genisoimage"
-    echo ""
-    echo "If you use Arch Linux you can install these using:"
-    echo "sudo pacman -S cabextract wimlib chntpw cdrtools"
-  elif [ `uname` == "Darwin" ]; then
-    # macOS
-    echo "macOS requires Homebrew (https://brew.sh) to install the prerequisite software."
-    echo "If you use Homebrew, you can install these using:"
-    echo "brew tap sidneys/homebrew"
-    echo "brew install cabextract wimlib cdrtools sidneys/homebrew/chntpw"
-  fi
+for prog in aria2c cabextract wimlib-imagex; do
+  which $prog &>/dev/null 2>&1 && continue;
+
+  echo "$prog does not seem to be installed"
+  echo "Check the readme.md for details"
   exit 1
-fi
+done
+
+for prog in genisoimage mkisofs; do
+  which $prog &>/dev/null && break;
+
+  echo "genisoimage nor mkisofs does seem to be installed"
+  echo "Check the readme.md for details"
+  exit 1
+done
 
 if ! [ -z $1 ]; then
   type="$1"
