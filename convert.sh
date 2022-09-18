@@ -307,7 +307,7 @@ if [ "$1" == "-?" -o "$1" == "--help" -o "$1" == "-h" ]; then
   exit
 fi
 
-for prog in aria2c cabextract wimlib-imagex; do
+for prog in aria2c cabextract wimlib-imagex chntpw; do
   which $prog &>/dev/null 2>&1 && continue;
 
   echo "$prog does not seem to be installed"
