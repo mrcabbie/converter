@@ -1,5 +1,5 @@
 #!/bin/bash
-scriptName="UUP Converter v0.7.1"
+scriptName="UUP Converter v0.7.2"
 UUP_CONVERTER_SCRIPT=1
 
 export PATH=${PATH}:/usr/sbin
@@ -315,13 +315,15 @@ for prog in aria2c cabextract wimlib-imagex chntpw; do
   exit 1
 done
 
-for prog in genisoimage mkisofs; do
-  which $prog &>/dev/null && break;
+mkiso_present=0
+which genisoimage &>/dev/null && mkiso_present=1
+which mkisofs &>/dev/null && mkiso_present=1
 
+if [ $mkiso_present -eq 0 ]; then
   echo "genisoimage nor mkisofs does seem to be installed"
-  echo "Check the readme.md for details"
+  echo "Check the readme.unix.md for details"
   exit 1
-done
+fi
 
 if ! [ -z $1 ]; then
   type="$1"
