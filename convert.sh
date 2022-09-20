@@ -321,7 +321,7 @@ which mkisofs &>/dev/null && mkiso_present=1
 
 if [ $mkiso_present -eq 0 ]; then
   echo "genisoimage nor mkisofs does seem to be installed"
-  echo "Check the readme.unix.md for details"
+  echo "Check the readme.md for details"
   exit 1
 fi
 
